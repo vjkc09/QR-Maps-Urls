@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_qr/widgets/custom_floatingactionbutton.dart';
 import 'package:flutter_application_qr/widgets/custom_navigatorbar.dart';
 
 class HomePage extends StatelessWidget {
@@ -20,6 +21,8 @@ class HomePage extends StatelessWidget {
         child: Text('Home page'),
       ),
       bottomNavigationBar: CustomNavigationBar(),
+      floatingActionButton: CustomFloatingActionButton(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
