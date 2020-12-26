@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_qr/pages/direcciones_page.dart';
 import 'package:flutter_application_qr/pages/mapas_page.dart';
+import 'package:flutter_application_qr/providers/db_provider.dart';
 import 'package:flutter_application_qr/providers/ui_provider.dart';
 import 'package:flutter_application_qr/widgets/custom_floatingactionbutton.dart';
 import 'package:flutter_application_qr/widgets/custom_navigatorbar.dart';
@@ -35,6 +36,14 @@ class _HomePageBody extends StatelessWidget {
     final uiProvider = Provider.of<UIProvider>(context);
     // Cambiar para mostrar la pagina respectiva
     final paginaActual = uiProvider.selectedMenuOpt;
+
+    // ignore: todo
+    // TODO: Temporal DB
+    final nuevoScan = new ScanModel(valor: 'http://google.com');
+    DBProvider.db.newScan(nuevoScan);
+    DBProvider.db.getScanById(5).then((value) => print(value.valor));
+    DBProvider.db.getScans().then(print);
+    DBProvider.db.deleteAllScans().then(print);
 
     switch (paginaActual) {
       case 0:
