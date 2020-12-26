@@ -22,7 +22,7 @@ class CustomNavigationBar extends StatelessWidget {
           title: Text('Mapa')
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.local_movies),
+          icon: Icon(Icons.directions),
           title: Text('Direcciones')
         )
       ]
