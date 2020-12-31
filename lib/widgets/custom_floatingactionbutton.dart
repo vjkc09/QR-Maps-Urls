@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_qr/providers/scan_list_provider.dart';
+import 'package:flutter_application_qr/utils/utils.dart';
 //import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:provider/provider.dart';
 
@@ -20,10 +21,17 @@ class CustomFloatingActionButton extends StatelessWidget {
                                                     false, 
                                                     ScanMode.QR);
         print(barcodeScanRes); */
-        final barcodeScanRes = 'https://www.google.com.mx/';
+        //final barcodeScanRes = 'https://google.com.mx';
+        final barcodeScanRes = 'geo:19.275710, -99.006368';
+
+        if(barcodeScanRes == '-1') return;
+
         final scanListProvider = Provider.of<ScanListProvider>(context, listen: false);
-        scanListProvider.nuevoScan(barcodeScanRes);
-        scanListProvider.nuevoScan('geo:15.33,15.66');
+       
+        final nuevoScan = await  scanListProvider.nuevoScan(barcodeScanRes);
+
+        launchURL(context, nuevoScan);
+        
       }
       );
   }
