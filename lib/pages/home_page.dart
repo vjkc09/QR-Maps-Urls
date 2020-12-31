@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_qr/pages/direcciones_page.dart';
 import 'package:flutter_application_qr/pages/mapas_page.dart';
-import 'package:flutter_application_qr/providers/db_provider.dart';
+import 'package:flutter_application_qr/providers/scan_list_provider.dart';
+//import 'package:flutter_application_qr/providers/db_provider.dart';
 import 'package:flutter_application_qr/providers/ui_provider.dart';
 import 'package:flutter_application_qr/widgets/custom_floatingactionbutton.dart';
 import 'package:flutter_application_qr/widgets/custom_navigatorbar.dart';
@@ -12,11 +13,15 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Historial'),
         actions: [
-          IconButton(icon: Icon(Icons.delete_forever), onPressed: () {})
+          IconButton(icon: Icon(Icons.delete_forever), onPressed: () {
+            Provider.of<ScanListProvider>(context, listen: false)
+                    .borrarTodos();
+          })
         ],
       ),
       body: _HomePageBody(),
@@ -37,18 +42,22 @@ class _HomePageBody extends StatelessWidget {
     // Cambiar para mostrar la pagina respectiva
     final paginaActual = uiProvider.selectedMenuOpt;
 
+    final scanListProvider = Provider.of<ScanListProvider>(context, listen: false);
+
     // ignore: todo
     // TODO: Temporal DB
-    final nuevoScan = new ScanModel(valor: 'http://google.com');
+    /* final nuevoScan = new ScanModel(valor: 'http://google.com');
     DBProvider.db.newScan(nuevoScan);
     DBProvider.db.getScanById(5).then((value) => print(value.valor));
     DBProvider.db.getScans().then(print);
-    DBProvider.db.deleteAllScans().then(print);
+    DBProvider.db.deleteAllScans().then(print); */
 
     switch (paginaActual) {
       case 0:
+        scanListProvider.cargarScanPorTipo('geo');
         return MapasPage();
       case 1:
+        scanListProvider.cargarScanPorTipo('http');
         return DireccionesPage();
       default:
         return MapasPage();

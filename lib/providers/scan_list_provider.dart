@@ -14,7 +14,6 @@ nuevoScan(String valor) async {
   nuevoScan.id  = id;
 
   if( this.tipoSeleccionado ==  nuevoScan.tipo ) {
-
     this.scans.add(nuevoScan);
     notifyListeners();
   }  
